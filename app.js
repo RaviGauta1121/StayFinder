@@ -28,7 +28,8 @@ const wrapAsyn = require("./utils/wrapAsyn.js");
 
 const app = express();
 const port = process.env.PORT || 8080;
-const dbUrl = "mongodb://localhost:27017/wanderlust";
+// const dbUrl = "mongodb://localhost:27017/wanderlust";
+const dbUrl = process.env.ATLASDB_URL;
 
 // View engine and public setup
 app.set("view engine", "ejs");
