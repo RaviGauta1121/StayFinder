@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplate") -%>
+<link rel="stylesheet" href="/css/index.css" />
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
+<p id="wish">Wishlists</p>
+
+<% if (currUser && currUser.favoriteListings && currUser.favoriteListings.length
+> 0) { %>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+  <% currUser.favoriteListings.forEach((listingId) => { %>
+
+  <a href="/listings/<%=listingId._id%>">
+    <div class="card listing-card">
+      <div class="remove-button-container">
+        <form action="/wishlists/remove" method="POST">
+          <input type="hidden" name="userId" value="<%= currUser._id %>" />
+          <input type="hidden" name="listingId" value="<%= listingId._id %>" />
+          <button type="submit" class="remove-button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </form>
+      </div>
+      <img
+        src="<%= listingId.image.url %>"
+        class="card-img-top"
+        alt="Listing Image"
+        style="height: 17rem"
+        id="listing-container"
+      />
+      <div class="card-body">
+        <p class="card-text" style="margin-left: 0.25rem">
+          <b><%=listingId.title %></b> <br />
+          <span
+            class="price-without-gst"
+            data-original-price="<%=listingId.price%>"
+            ><b> &#x20B9; <%=listingId.price.toLocaleString("en-IN")%></b> /
+            night
+          </span>
+          <span
+            class="price-with-gst"
+            style="display: none"
+            data-original-price="<%=listingId.price%>"
+            ><b>
+              &#x20B9; <%= (listingId.price * 1.18).toLocaleString("en-IN") %> </b
+            >/ night
+          </span>
+        </p>
+      </div>
+    </div></a
+  >
+
+  <% }); %>
+</div>
+<% } else { %>
+<p>No items in your wishlist.</p>
+<% } %>
+
+<script src="/JS/index.js"></script>
+<script src="/JS/currency.js"></script>

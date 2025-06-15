@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation</title>
+
+  <!-- CSP Policy -->
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/nav.css" />
+
+  <style>
+    /* Basic styles for missing CSS classes */
+    .searchBox {
+      display: flex;
+      align-items: center;
+      background: #f0f0f0;
+      border-radius: 25px;
+      padding: 5px;
+    }
+
+    .searchInput {
+      border: none;
+      background: transparent;
+      padding: 8px 15px;
+      outline: none;
+      flex: 1;
+    }
+
+    .searchButton {
+      border: none;
+      background: #ff5a5f;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .user-toggle {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 5px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-toggle a {
+      padding: 4px 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .user-toggle a:hover {
+      background: #f5f5f5;
+    }
+
+    .containers {
+      cursor: pointer;
+    }
+
+    .checkmark {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .checkmark span {
+      width: 20px;
+      height: 2px;
+      background: #333;
+      transition: 0.3s;
+    }
+
+    #check-div:checked+.checkmark span:first-child {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    #check-div:checked+.checkmark span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #check-div:checked+.checkmark span:last-child {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    #check-div {
+      display: none;
+    }
+
+    .modal {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 8px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    #filter-near_search {
+      cursor: pointer;
+      padding: 10px;
+      margin-left: 10px;
+    }
+
+    .svg-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    #search-filter {
+      display: flex;
+      align-items: center;
+    }
+
+    .main {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-side {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+    }
+
+    #user-initial {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #ff5a5f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-sm bg-body-light border-bottom sticky-top" id="nav"
+    style="display: flex; padding-inline: 1.5rem">
+    <div class="container-fluid" id="nav-contain">
+      <a class="navbar-brand" href="/listings">
+        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt"
+          viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet" class="svg-icon" id="logo">
+          <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#fe424d" stroke="none">
+            <path
+              d="M2173 4443 c-12 -2 -34 -18 -48 -34 -24 -29 -25 -37 -25 -149 0 -110 2 -121 23 -146 15 -17 38 -29 63 -33 l39 -6 5 -265 5 -265 47 -3 48 -3 2 268 3 268 225 0 225 0 3 -268 2 -268 48 3 47 3 5 265 5 265 39 6 c25 4 48 16 63 33 21 25 23 36 23 146 0 118 0 120 -29 152 l-29 33 -384 1 c-211 1 -393 0 -405 -3z" />
+            <path
+              d="M3850 3549 c-90 -10 -333 -49 -338 -54 -2 -2 14 -20 35 -40 43 -40 25 -40 243 -10 177 24 421 17 502 -14 140 -54 145 -155 16 -318 -56 -71 -173 -182 -265 -251 -34 -26 -62 -49 -63 -53 0 -3 23 -13 50 -23 l50 -18 48 38 c158 129 289 274 336 374 25 52 31 78 31 132 0 58 -4 72 -30 109 -35 49 -106 92 -190 114 -74 20 -307 27 -425 14z" />
+            <path
+              d="M1778 3436 c-58 -16 -118 -55 -152 -99 -57 -75 -56 -57 -56 -838 l0 -719 -22 -10 c-13 -5 -69 -16 -124 -25 -348 -53 -592 -35 -675 48 -29 28 -31 35 -27 88 6 79 50 150 173 274 110 110 275 239 457 355 l118 75 0 54 c0 40 -3 52 -13 48 -8 -3 -72 -42 -143 -87 -366 -232 -629 -486 -679 -652 -8 -29 -15 -68 -15 -88 0 -48 37 -117 80 -152 147 -116 521 -116 995 1 171 42 437 120 452 133 34 28 -2 118 -110 283 -36 54 -64 103 -61 107 3 4 93 -39 202 -95 181 -93 202 -101 252 -101 52 0 88 17 675 315 l620 314 65 -1 c56 0 82 -7 180 -50 126 -55 143 -74 88 -97 -18 -8 -226 -101 -463 -207 -824 -369 -1129 -492 -1521 -609 -166 -50 -452 -121 -486 -121 -17 0 -18 -16 -18 -203 0 -229 7 -267 66 -335 19 -23 60 -53 92 -69 l57 -28 775 0 c767 0 775 0 821 21 63 29 114 77 141 132 23 47 23 48 28 572 l5 525 280 121 c154 67 291 129 304 139 52 39 61 121 17 168 -12 13 -78 48 -146 77 -122 53 -127 54 -220 54 -86 1 -101 -2 -162 -31 -37 -17 -69 -29 -72 -25 -3 3 -6 121 -6 262 0 287 -4 311 -65 386 -21 25 -59 54 -93 71 l-57 28 -755 2 c-587 2 -765 -1 -802 -11z m961 -865 c201 -48 366 -92 368 -97 2 -5 -78 -50 -177 -99 -166 -82 -182 -89 -203 -76 -12 8 -113 79 -224 158 -164 116 -203 148 -203 167 0 12 3 26 7 29 15 15 84 2 432 -82z m660 -478 c-6 -16 -60 -160 -120 -320 -140 -377 -148 -393 -200 -393 -32 0 -79 49 -79 83 0 36 49 510 54 514 10 10 323 142 338 142 15 1 16 -3 7 -26z" />
+            <path d="M1932 768 l3 -93 105 0 105 0 3 93 3 92 -111 0 -111 0 3 -92z" />
+            <path d="M2972 768 l3 -93 105 0 105 0 3 93 3 92 -111 0 -111 0 3 -92z" />
+          </g>
+        </svg>
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <a class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home Page" href="/listings">
+          <strong id="explore">Explore</strong>
+        </a>
+      </div>
+
+      <div class="main">
+        <div id="search-filter">
+          <div class="searchBox">
+            <input class="searchInput" type="text" name="" placeholder="Search Title" />
+            <button class="searchButton" href="#">
+              <lord-icon src="https://cdn.lordicon.com/fkdzyfle.json" trigger="hover"
+                style="width: 1.25rem; height: 1.25rem" colors="primary:#ffffff">
+              </lord-icon>
+            </button>
+          </div>
+
+          <div id="filter-near_search">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+        </div>
+
+        <div class="navbar-nav nav-side">
+          <a class="nav-link" href="/listings/new" id="new-airbnb">Airbnb your home</a>
+          <span class="material-symbols-outlined" id="globe">
+            <lord-icon src="https://cdn.lordicon.com/pbbsmkso.json" trigger="hover" stroke="bold"
+              colors="primary:#000000,secondary:#000000">
+            </lord-icon>
+          </span>
+
+          <div class="user-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="User">
+            <label class="containers">
+              <input type="checkbox" id="check-div" role="switch" />
+              <div class="checkmark">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </label>
+            <i id="user-initial">
+              <!-- This would be dynamically generated by your backend -->
+              <i class="fa-regular fa-user" id="user-icon"></i>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="user-toggle">
+    <!-- These would be conditionally rendered by your backend -->
+    <a class="nav-link" href="/signup">Sign Up</a>
+    <a class="nav-link" href="/login">Log In</a>
+    <a class="nav-link" href="/logout">Log Out</a>
+    <a class="nav-link" href="/wishlists">Wishlist</a>
+  </div>
+
+  <!-- Modal for filters -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Filters</h3>
+      <p>Add your filter options here...</p>
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let toggleDiv = document.querySelector(".user-toggle");
+    let toggleButton = document.querySelector("#check-div");
+    toggleButton.addEventListener("change", () => {
+      if (toggleButton.checked) {
+        toggleDiv.style.display = "inline-flex";
+      } else {
+        toggleDiv.style.display = "none";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.querySelector(".searchInput");
+      const placeholderTexts = ["Search Title", "Enter Hotel", "Type to Search"];
+      let currentIndex = 0;
+
+      function typeEffect(text, callback) {
+        let i = 0;
+        searchInput.placeholder = "";
+        const typingInterval = setInterval(() => {
+          if (i < text.length) {
+            searchInput.placeholder += text.charAt(i);
+            i++;
+          } else {
+            clearInterval(typingInterval);
+            setTimeout(callback, 1000);
+          }
+        }, 100);
+      }
+
+      function eraseEffect(callback) {
+        let text = searchInput.placeholder;
+        const erasingInterval = setInterval(() => {
+          if (text.length > 0) {
+            text = text.substring(0, text.length - 1);
+            searchInput.placeholder = text;
+          } else {
+            clearInterval(erasingInterval);
+            callback();
+          }
+        }, 50);
+      }
+
+      function loopPlaceholders() {
+        typeEffect(placeholderTexts[currentIndex], () => {
+          eraseEffect(() => {
+            currentIndex = (currentIndex + 1) % placeholderTexts.length;
+            loopPlaceholders();
+          });
+        });
+      }
+
+      loopPlaceholders();
+
+      // Initialize Bootstrap tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    });
+
+    // Filter modal functionality
+    document.querySelector("#filter-near_search").addEventListener("click", () => {
+      document.getElementById("modal").style.display = "block";
+    });
+
+    // Close modal when clicking the X
+    document.querySelector(".close").addEventListener("click", () => {
+      document.getElementById("modal").style.display = "none";
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", (event) => {
+      const modal = document.getElementById("modal");
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/filter-tab.css" />
+<div id="modal" class="modal filters">
+  <div class="modal-content">
+    <div style="width: 100%">
+      <span class="close" id="close">
+        <lord-icon
+          src="https://cdn.lordicon.com/nqtddedc.json"
+          trigger="hover"
+          state="hover-cross-3"
+        >
+        </lord-icon>
+      </span>
+      <p id="curr-head">Filters</p>
+    </div>
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Type of place</h4>
+      <p class="extra">Search rooms, entire homes or any type of place</p>
+      <div id="main">
+        <button class="main-nav filter-typeOfPlace" data-value="entire-place">
+          Entire Place
+        </button>
+        <button class="main-nav filter-typeOfPlace" data-value="room">
+          Room
+        </button>
+        <button class="main-nav filter-typeOfPlace" data-value="shared-room">
+          Shared Room
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Rooms & Bedrooms</h4>
+      <br />
+      <p><strong>Bedrooms :</strong></p>
+      <div class="btn-container btn-bedrooms">
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8+</button>
+      </div>
+      <br />
+      <p><strong>Beds :</strong></p>
+      <div class="btn-container btn-beds">
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8+</button>
+      </div>
+    </div>
+    <hr />
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Rooms Accessibility</h4>
+      <br />
+
+      <div class="btn-container2 btn-accessibility">
+        <button data-value="yes">Yes</button>
+        <button data-value="no">No</button>
+      </div>
+    </div>
+    <div class="footer-filter">
+      <span id="clear-all">Clear</span>
+      <button id="show">Show</button>
+    </div>
+  </div>
+</div>
+
+<script src="/JS/filter-tab.js"></script>

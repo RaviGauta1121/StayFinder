@@ -1,0 +1,133 @@
+<% layout("layouts/boilerplate") -%>
+
+<link rel="stylesheet" href="/css/index.css" />
+
+<style>
+  .container {
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 470px) {
+    .container {
+      padding-inline: 0.75rem;
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    #filter-near_search {
+      display: inline-flex;
+      border: 1.5px solid rgba(128, 128, 128, 0.507);
+      border-radius: 50%;
+      padding: 0.65rem;
+      margin-inline: 0.25rem;
+      cursor: pointer;
+      color: black;
+    }
+
+    #filter-near_search i {
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<body>
+  <% include("../includes/currency.ejs") %> <%-
+  include("../includes/filters.ejs") %>
+
+  <div class="tax-toggle toggler" style="margin-top: 1rem">
+    <label class="form-check-label" for="flexSwitchCheckDefault"
+      >Display total after taxes</label
+    >
+    <div class="form-check-reverse form-switch switch-container">
+      <label class="switch">
+        <input type="checkbox" role="switch" id="flexSwitch" />
+        <span class="slider">
+          <svg
+            class="slider-icon"
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="presentation"
+          >
+            <path fill="none" d="m4 16.5 8 8 16-16"></path>
+          </svg>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div class="row row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mb-4">
+    <% for(let listing of listings){ %>
+    <!-- changed 'listings' to 'listing' -->
+    <a href="/listings/<%=listing._id%>" id="listing-link">
+      <!-- changed 'listings' to 'listing' -->
+      <div
+        class="card listing-card mt-3"
+        data-title="<%=listing.title.toLowerCase()%>"
+        data-listing-id="<%=listing._id%>"
+        data-bedrooms="<%= listing.bedrooms %>"
+        data-beds="<%= listing.beds %>"
+        data-accessibility="<%= listing.locked %>"
+        data-type="<%= listing.typeOfPlace %>"
+      >
+        <!-- Removed form tags as they are not necessary here -->
+        <img
+          src="<%=listing.image.url%>"
+          class="card-img-top"
+          alt="Listing Image"
+          style="height: 18.75rem"
+        />
+
+        <form action="/wishlists/add" method="POST">
+          <% if(currUser){ %>
+          <input type="hidden" name="userId" value="<%= currUser._id %>" />
+          <input type="hidden" name="listingId" value="<%= listing._id %>" />
+          <button
+            type="submit"
+            id="submit-heart"
+            style="background: none; border: none; padding: 0"
+          >
+            <p style="margin-right: 0.5rem; font-weight: 300">
+              <% if (currUser &&
+              currUser.favoriteListings.includes(listing._id)) { %>
+              <i class="fa-solid fa-heart" style="color: #ff385c"></i>
+              <!-- Filled heart -->
+              <% } else { %>
+              <i class="fa-solid fa-heart" style="color: rgb(64, 64, 64)"></i>
+              <!-- Empty heart -->
+              <% } %>
+            </p>
+          </button>
+          <% } %>
+        </form>
+
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <p class="card-text">
+            <b><%=listing.title %></b> <br />
+            <span
+              class="price-without-gst"
+              data-original-price="<%=listing.price%>"
+              ><b> &#x20B9; <%=listing.price.toLocaleString("en-IN")%></b> /
+              night</span
+            >
+            <span
+              class="price-with-gst"
+              style="display: none"
+              data-original-price="<%=listing.price%>"
+              ><b>
+                &#x20B9; <%= (listing.price * 1.18).toLocaleString("en-IN")
+                %></b
+              >/ night</span
+            >
+          </p>
+        </div>
+      </div>
+    </a>
+    <% } %>
+  </div>
+</body>
+
+<script src="/JS/index.js"></script>
+<script src="/JS/currency.js"></script>

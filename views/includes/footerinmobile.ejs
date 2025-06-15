@@ -1,0 +1,93 @@
+<style>
+  .footer a {
+    color: gray;
+    text-decoration: none;
+  }
+
+  .footer a.active {
+    color: #fe424d !important;
+  }
+
+  .footer a:hover {
+    margin-top: -4px;
+  }
+
+  .footer a.active .footer-icon-div .inside,
+  .footer a.active p,
+  .footer a.active .material-symbols-outlined,
+  .footer a.active .icon-footer,
+  .footer a.active #icon-footer {
+    color: #fe424d;
+  }
+</style>
+
+<div class="footer">
+  <a href="/listings" class="<%= currPage === '/listings' ? 'active' : '' %>">
+    <div class="footer-icon-div">
+      <div class="inside">
+        <i class="fa-solid fa-magnifying-glass icon-footer"></i>
+      </div>
+      <p>Explore</p>
+    </div>
+  </a>
+  <% if (!currUser) { %>
+  <a href="/login" class="<%= currPage === '/login' ? 'active' : '' %>">
+    <div class="footer-icon-div">
+      <div class="inside">
+        <span class="material-symbols-outlined" id="icon-footer"> login </span>
+      </div>
+      <p>Login</p>
+    </div>
+  </a>
+  <a href="/signup" class="<%= currPage === '/signup' ? 'active' : '' %>">
+    <div class="footer-icon-div">
+      <div class="inside">
+        <i class="fa-regular fa-user icon-footer"></i>
+      </div>
+      <p>Sign Up</p>
+    </div>
+  </a>
+  <% } %> <% if (currUser) { %>
+
+  <a href="/wishlists" class="<%= currPage === '/wishlists' ? 'active' : '' %>">
+    <div class="footer-icon-div">
+      <div class="inside">
+        <i class="fa-regular fa-heart icon-footer"></i>
+      </div>
+      <p>Wishlists</p>
+    </div>
+  </a>
+  <a
+    href="/listings/new"
+    class="<%= currPage === '/listings/new' ? 'active' : '' %>"
+  >
+    <div class="footer-icon-div">
+      <div class="inside">
+        <i class="fa-solid fa-plus icon-footer"></i>
+      </div>
+      <p>Add New</p>
+    </div>
+  </a>
+  <a href="/logout" class="<%= currPage === '/logout' ? 'active' : '' %>">
+    <div class="footer-icon-div">
+      <div class="inside">
+        <span class="material-symbols-outlined" id="icon-footer"> logout </span>
+      </div>
+      <p>Log Out</p>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".footer a");
+    const currentPath = window.location.pathname;
+
+    links.forEach((link) => {
+      if (link.getAttribute("href") === currentPath) {
+        link.classList.add("active");
+      }
+    });
+  });
+</script>
