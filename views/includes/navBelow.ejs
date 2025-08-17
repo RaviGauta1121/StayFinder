@@ -6,251 +6,154 @@
       <i class="fa-solid fa-angle-left"></i>
     </button>
     <div id="filters">
-      <div
-        class="filter <%= currPage === '/filter/trending' ? 'below-nav' : '' %>"
-      >
+      <div class="filter <%= currPage === '/filter/trending' ? 'below-nav' : '' %>">
         <a href="/filter/trending">
           <div>
-            <img
-              src="/Assets/fire.png"
-              alt="Trending"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/fire.png" alt="Trending" loading="lazy" class="filter-img" />
           </div>
           <p>Trending</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Beach">
+      <div class="filter <%= currPage === '/filter/beach' ? 'below-nav' : '' %>">
+        <a href="/filter/beach">
           <div>
-            <img
-              src="/Assets/chair.png"
-              alt="Beach"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/chair.png" alt="Beach" loading="lazy" class="filter-img" />
           </div>
           <p>Beach</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Arctic">
+      <div class="filter <%= currPage === '/filter/arctic' ? 'below-nav' : '' %>">
+        <a href="/filter/arctic">
           <div>
-            <img
-              src="/Assets/snowflake.png"
-              alt="Arctic"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/snowflake.png" alt="Arctic" loading="lazy" class="filter-img" />
           </div>
           <p>Arctic</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/outside' ? 'below-nav' : '' %>">
         <a href="/filter/outside">
           <div>
-            <img
-              src="/Assets/nature-park.png"
-              alt="Outside"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/nature-park.png" alt="Outside" loading="lazy" class="filter-img" />
           </div>
           <p>Outside</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Iconic-city">
+      <div class="filter <%= currPage === '/filter/iconic-city' ? 'below-nav' : '' %>">
+        <a href="/filter/iconic-city">
           <div>
-            <img
-              src="/Assets/building-icon.png"
-              alt="City"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/building-icon.png" alt="City" loading="lazy" class="filter-img" />
           </div>
           <p>City</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Castles">
+      <div class="filter <%= currPage === '/filter/castles' ? 'below-nav' : '' %>">
+        <a href="/filter/castles">
           <div>
-            <img
-              src="/Assets/castle.png"
-              alt="Castles"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/castle.png" alt="Castles" loading="lazy" class="filter-img" />
           </div>
           <p>Castles</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Pool">
+      <div class="filter <%= currPage === '/filter/pool' ? 'below-nav' : '' %>">
+        <a href="/filter/pool">
           <div>
-            <img
-              src="/Assets/swimming-pool.png"
-              alt="Pool"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/swimming-pool.png" alt="Pool" loading="lazy" class="filter-img" />
           </div>
           <p>Pool</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/camping' ? 'below-nav' : '' %>">
         <a href="/filter/camping">
           <div>
-            <img
-              src="/Assets/camping.png"
-              alt="Camping"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/camping.png" alt="Camping" loading="lazy" class="filter-img" />
           </div>
           <p>Camping</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/cabin' ? 'below-nav' : '' %>">
         <a href="/filter/cabin">
           <div>
-            <img
-              src="/Assets/cabin.png"
-              alt="Cabin"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/cabin.png" alt="Cabin" loading="lazy" class="filter-img" />
           </div>
           <p>Cabin</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/farms' ? 'below-nav' : '' %>">
         <a href="/filter/farms">
           <div>
-            <img
-              src="/Assets/barn.png"
-              alt="Farms"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/barn.png" alt="Farms" loading="lazy" class="filter-img" />
           </div>
           <p>Farms</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/mountain' ? 'below-nav' : '' %>">
         <a href="/filter/mountain">
           <div>
-            <img
-              src="/Assets/mountain.png"
-              alt="Mountain"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/mountain.png" alt="Mountain" loading="lazy" class="filter-img" />
           </div>
           <p>Mountain</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/domes' ? 'below-nav' : '' %>">
         <a href="/filter/domes">
           <div>
-            <img
-              src="/Assets/aviary.png"
-              alt="Domes"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/aviary.png" alt="Domes" loading="lazy" class="filter-img" />
           </div>
           <p>Domes</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/boats' ? 'below-nav' : '' %>">
         <a href="/filter/boats">
           <div>
-            <img
-              src="/Assets/cruise.png"
-              alt="Boats"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/cruise.png" alt="Boats" loading="lazy" class="filter-img" />
           </div>
           <p>Boats</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/tropical' ? 'below-nav' : '' %>">
         <a href="/filter/tropical">
           <div>
-            <img
-              src="/Assets/beach.png"
-              alt="Tropical"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/beach.png" alt="Tropical" loading="lazy" class="filter-img" />
           </div>
           <p>Tropical</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/windmill' ? 'below-nav' : '' %>">
         <a href="/filter/windmill">
           <div>
-            <img
-              src="/Assets/windmill.png"
-              alt="Windmill"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/windmill.png" alt="Windmill" loading="lazy" class="filter-img" />
           </div>
           <p>Windmill</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/ski' ? 'below-nav' : '' %>">
         <a href="/filter/ski">
           <div>
-            <img
-              src="/Assets/alpine.png"
-              alt="Ski"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/alpine.png" alt="Ski" loading="lazy" class="filter-img" />
           </div>
           <p>Ski</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/chef' ? 'below-nav' : '' %>">
         <a href="/filter/chef">
           <div>
-            <img
-              src="/Assets/chef.png"
-              alt="Chef"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/chef.png" alt="Chef" loading="lazy" class="filter-img" />
           </div>
           <p>Chef</p>
         </a>
       </div>
-      <div class="filter">
-        <a href="/filter/Disabled">
+      <div class="filter <%= currPage === '/filter/disabled' ? 'below-nav' : '' %>">
+        <a href="/filter/disabled">
           <div>
-            <img
-              src="/Assets/disabled-people.png"
-              alt="Disabled"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/disabled-people.png" alt="Disabled" loading="lazy" class="filter-img" />
           </div>
           <p>Disabled</p>
         </a>
       </div>
-      <div class="filter">
+      <div class="filter <%= currPage === '/filter/play' ? 'below-nav' : '' %>">
         <a href="/filter/play">
           <div>
-            <img
-              src="/Assets/tennis.png"
-              alt="Play"
-              loading="lazy"
-              class="filter-img"
-            />
+            <img src="/Assets/tennis.png" alt="Play" loading="lazy" class="filter-img" />
           </div>
           <p>Play</p>
         </a>
@@ -266,20 +169,12 @@
     </div>
 
     <div class="tax-toggle">
-      <label class="form-check-label" for="flexSwitchCheckDefault"
-        >Display total after taxes</label
-      >
+      <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
       <div class="form-check-reverse form-switch switch-container">
         <label class="switch">
           <input type="checkbox" role="switch" id="flexSwitchCheck" />
           <span class="slider">
-            <svg
-              class="slider-icon"
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              role="presentation"
-            >
+            <svg class="slider-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation">
               <path fill="none" d="m4 16.5 8 8 16-16"></path>
             </svg>
           </span>
@@ -289,19 +184,258 @@
   </div>
 </nav>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const filters = document.querySelectorAll(".filter");
-    const currentPath = window.location.pathname;
+<!-- Filter Modal -->
+<link rel="stylesheet" href="/css/filter-tab.css" />
+<div id="modal" class="modal filters">
+  <div class="modal-content">
+    <div style="width: 100%">
+      <span class="close" id="close">
+        <lord-icon src="https://cdn.lordicon.com/nqtddedc.json" trigger="hover" state="hover-cross-3"></lord-icon>
+      </span>
+      <p id="curr-head">Filters</p>
+    </div>
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Type of place</h4>
+      <p class="extra">Search rooms, entire homes or any type of place</p>
+      <div id="main">
+        <button class="main-nav filter-typeOfPlace" data-value="entire-place">Entire Place</button>
+        <button class="main-nav filter-typeOfPlace" data-value="room">Room</button>
+        <button class="main-nav filter-typeOfPlace" data-value="shared-room">Shared Room</button>
+      </div>
+    </div>
+    <hr />
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Rooms & Bedrooms</h4>
+      <br />
+      <p><strong>Bedrooms :</strong></p>
+      <div class="btn-container btn-bedrooms">
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8+</button>
+      </div>
+      <br />
+      <p><strong>Beds :</strong></p>
+      <div class="btn-container btn-beds">
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8+</button>
+      </div>
+    </div>
+    <hr />
+    <div id="typeOfPlace">
+      <h4 class="head-to-indicate">Rooms Accessibility</h4>
+      <br />
+      <div class="btn-container2 btn-accessibility">
+        <button data-value="yes">Yes</button>
+        <button data-value="no">No</button>
+      </div>
+    </div>
+    <div class="footer-filter">
+      <span id="clear-all">Clear</span>
+      <button id="show">Show</button>
+    </div>
+  </div>
+</div>
 
-    filters.forEach((filter) => {
-      const link = filter.querySelector("a");
-      if (link.getAttribute("href") === currentPath) {
-        filter.classList.add("below-nav");
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Handle filter navigation highlighting
+  const filters = document.querySelectorAll(".filter");
+  const currentPath = window.location.pathname;
+
+  filters.forEach((filter) => {
+    const link = filter.querySelector("a");
+    if (link && link.getAttribute("href") === currentPath) {
+      filter.classList.add("below-nav");
+    }
+  });
+
+  // Handle filter modal
+  const filterTab = document.getElementById("filter-tab");
+  const modal = document.getElementById("modal");
+  const closeBtn = document.getElementById("close");
+
+  if (filterTab && modal) {
+    filterTab.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+  }
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // Handle scroll buttons
+  const scrollLeftBtn = document.getElementById("scroll-left");
+  const scrollRightBtn = document.getElementById("scroll-right");
+  const filtersContainer = document.getElementById("filters");
+
+  if (scrollLeftBtn && filtersContainer) {
+    scrollLeftBtn.addEventListener("click", function () {
+      filtersContainer.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  if (scrollRightBtn && filtersContainer) {
+    scrollRightBtn.addEventListener("click", function () {
+      filtersContainer.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  // Handle tax toggle
+  const taxToggle = document.getElementById("flexSwitchCheck");
+  if (taxToggle) {
+    taxToggle.addEventListener("click", function () {
+      let pricesWithoutGst = document.querySelectorAll(".price-without-gst");
+      let pricesWithGst = document.querySelectorAll(".price-with-gst");
+
+      pricesWithoutGst.forEach((item) => {
+        item.style.display = item.style.display === "none" ? "inline" : "none";
+      });
+
+      pricesWithGst.forEach((item) => {
+        item.style.display = item.style.display === "none" ? "inline" : "none";
+      });
+    });
+  }
+
+  // Handle search functionality
+  const searchInput = document.querySelector(".searchInput");
+  let originalOrder = [];
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      let searchValue = this.value.trim().toLowerCase();
+      let cards = document.querySelectorAll(".listing-card");
+      let container = document.getElementById("listing-container");
+      let matchedCards = [];
+
+      if (originalOrder.length === 0) {
+        originalOrder = Array.from(cards);
+      }
+
+      cards.forEach((card) => {
+        let title = card.dataset.title;
+        if (title && title.includes(searchValue)) {
+          matchedCards.push(card);
+        }
+      });
+
+      cards.forEach((card) => {
+        card.style.display = "none";
+      });
+
+      matchedCards.forEach((card) => {
+        card.style.display = "block";
+        if (container) {
+          container.insertBefore(card, container.firstChild);
+        }
+      });
+    });
+
+    searchInput.addEventListener("blur", function () {
+      if (this.value === "") {
+        let container = document.getElementById("listing-container");
+        if (container) {
+          container.innerHTML = "";
+
+          originalOrder.forEach((card) => {
+            container.appendChild(card);
+            card.style.display = "block";
+          });
+
+          originalOrder = [];
+        }
+      }
+    });
+  }
+
+  // Handle listing card clicks
+  document.querySelectorAll(".listing-card").forEach((card) => {
+    card.addEventListener("click", function () {
+      let listingId = this.dataset.listingId;
+      if (listingId) {
+        let url = `/listings/${listingId}`;
+        window.location.href = url;
       }
     });
   });
-  document.getElementById("filter-tab").addEventListener("click", () => {
-    document.getElementById("modal").style.display = "block";
+
+  // Handle modal filter interactions
+  const filterButtons = document.querySelectorAll('.filter-typeOfPlace, .btn-container button, .btn-container2 button');
+  
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove active class from siblings
+      const siblings = this.parentElement.querySelectorAll('button');
+      siblings.forEach(sibling => sibling.classList.remove('active'));
+      
+      // Add active class to clicked button
+      this.classList.add('active');
+    });
   });
+
+  // Handle clear all filters
+  const clearAllBtn = document.getElementById('clear-all');
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', function() {
+      // Remove active class from all filter buttons
+      filterButtons.forEach(button => button.classList.remove('active'));
+    });
+  }
+
+  // Handle show results (you'll need to implement the actual filtering logic)
+  const showBtn = document.getElementById('show');
+  if (showBtn && modal) {
+    showBtn.addEventListener('click', function() {
+      // Get selected filters
+      const selectedType = document.querySelector('.filter-typeOfPlace.active')?.dataset.value;
+      const selectedBedrooms = document.querySelector('.btn-bedrooms button.active')?.dataset.value;
+      const selectedBeds = document.querySelector('.btn-beds button.active')?.dataset.value;
+      const selectedAccessibility = document.querySelector('.btn-accessibility button.active')?.dataset.value;
+
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (selectedType) params.append('type', selectedType);
+      if (selectedBedrooms) params.append('bedrooms', selectedBedrooms);
+      if (selectedBeds) params.append('beds', selectedBeds);
+      if (selectedAccessibility) params.append('accessibility', selectedAccessibility);
+
+      // Apply filters (redirect to filtered results)
+      const currentCategory = window.location.pathname.split('/').pop();
+      const newUrl = `/filter/${currentCategory}${params.toString() ? '?' + params.toString() : ''}`;
+      
+      modal.style.display = "none";
+      window.location.href = newUrl;
+    });
+  }
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('modal');
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
 </script>
+
+<script src="/JS/filter-tab.js"></script>

@@ -4,19 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Navigation</title>
-
-  <!-- CSP Policy -->
+  <title>Navigation with Advanced Filters</title>
 
   <!-- External CSS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/css/nav.css" />
 
   <style>
-    /* Basic styles for missing CSS classes */
+    /* Navigation Styles */
     .searchBox {
       display: flex;
       align-items: center;
@@ -56,12 +53,14 @@
       display: none;
       flex-direction: column;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1001;
     }
 
     .user-toggle a {
-      padding: 4px 10px;
+      padding: 8px 15px;
       text-decoration: none;
       color: #333;
+      border-radius: 4px;
     }
 
     .user-toggle a:hover {
@@ -99,44 +98,6 @@
 
     #check-div {
       display: none;
-    }
-
-    .modal {
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      max-width: 500px;
-      border-radius: 8px;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: black;
-    }
-
-    #filter-near_search {
-      cursor: pointer;
-      padding: 10px;
-      margin-left: 10px;
     }
 
     .svg-icon {
@@ -181,6 +142,325 @@
       align-items: center;
       justify-content: center;
       font-weight: bold;
+    }
+
+    #filter-near_search {
+      cursor: pointer;
+      padding: 10px;
+      margin-left: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    #filter-near_search:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Enhanced Filter Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+      background-color: #ffffff;
+      margin: 2% auto;
+      padding: 0;
+      border: none;
+      width: 90%;
+      max-width: 780px;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+      padding: 8px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close:hover {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .filter-section {
+      margin-bottom: 35px;
+    }
+
+    .filter-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .filter-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .filter-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .filter-options {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: #333;
+      background-color: #f8f8f8;
+    }
+
+    .filter-btn.active {
+      background-color: #333;
+      border-color: #333;
+      color: #fff;
+    }
+
+    .counter-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .counter-item {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .counter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .counter-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .counter-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .counter-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+
+    .counter-btn:hover {
+      border-color: #333;
+      color: #333;
+    }
+
+    .counter-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .counter-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .price-range {
+      margin-top: 20px;
+    }
+
+    .price-inputs {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .price-input-group {
+      flex: 1;
+    }
+
+    .price-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .price-input:focus {
+      outline: none;
+      border-color: #333;
+    }
+
+    .price-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      border-top: 1px solid #e0e0e0;
+      background-color: #fafafa;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .clear-btn {
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 8px 0;
+    }
+
+    .clear-btn:hover {
+      color: #333;
+    }
+
+    .apply-btn {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .apply-btn:hover {
+      background-color: #222;
+      transform: translateY(-1px);
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 25px 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 5% auto;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .filter-options {
+        gap: 8px;
+      }
+
+      .filter-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .counter-section {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .counter-item {
+        min-width: auto;
+      }
     }
   </style>
 </head>
@@ -246,7 +526,6 @@
               </div>
             </label>
             <i id="user-initial">
-              <!-- This would be dynamically generated by your backend -->
               <i class="fa-regular fa-user" id="user-icon"></i>
             </i>
           </div>
@@ -256,19 +535,143 @@
   </nav>
 
   <div class="user-toggle">
-    <!-- These would be conditionally rendered by your backend -->
     <a class="nav-link" href="/signup">Sign Up</a>
     <a class="nav-link" href="/login">Log In</a>
     <a class="nav-link" href="/logout">Log Out</a>
     <a class="nav-link" href="/wishlists">Wishlist</a>
   </div>
 
-  <!-- Modal for filters -->
+  <!-- Enhanced Filter Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Filters</h3>
-      <p>Add your filter options here...</p>
+      <div class="modal-header">
+        <h2 class="modal-title">Filters</h2>
+        <button class="close">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- Type of Place -->
+        <div class="filter-section">
+          <h3 class="filter-title">Type of place</h3>
+          <p class="filter-description">Search rooms, entire homes, or any type of place</p>
+          <div class="filter-options">
+            <button class="filter-btn" data-filter="type" data-value="entire-place">Entire Place</button>
+            <button class="filter-btn" data-filter="type" data-value="room">Room</button>
+            <button class="filter-btn" data-filter="type" data-value="shared-room">Shared Room</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Price Range -->
+        <div class="filter-section">
+          <h3 class="filter-title">Price range</h3>
+          <p class="filter-description">Nightly prices before fees and taxes</p>
+          <div class="price-range">
+            <div class="price-inputs">
+              <div class="price-input-group">
+                <div class="price-label">Minimum</div>
+                <input type="number" class="price-input" id="min-price" placeholder="₹0" min="0">
+              </div>
+              <div class="price-input-group">
+                <div class="price-label">Maximum</div>
+                <input type="number" class="price-input" id="max-price" placeholder="₹10000+" min="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Rooms and Beds -->
+        <div class="filter-section">
+          <h3 class="filter-title">Rooms and beds</h3>
+          <div class="counter-section">
+            <div class="counter-item">
+              <div class="counter-header">
+                <span class="counter-label">Bedrooms</span>
+                <div class="counter-controls">
+                  <button class="counter-btn" data-counter="bedrooms" data-action="decrease">-</button>
+                  <span class="counter-value" id="bedrooms-count">Any</span>
+                  <button class="counter-btn" data-counter="bedrooms" data-action="increase">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-header">
+                <span class="counter-label">Beds</span>
+                <div class="counter-controls">
+                  <button class="counter-btn" data-counter="beds" data-action="decrease">-</button>
+                  <span class="counter-value" id="beds-count">Any</span>
+                  <button class="counter-btn" data-counter="beds" data-action="increase">+</button>
+                </div>
+              </div>
+            </div>
+            <div class="counter-item">
+              <div class="counter-header">
+                <span class="counter-label">Bathrooms</span>
+                <div class="counter-controls">
+                  <button class="counter-btn" data-counter="bathrooms" data-action="decrease">-</button>
+                  <span class="counter-value" id="bathrooms-count">Any</span>
+                  <button class="counter-btn" data-counter="bathrooms" data-action="increase">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Property Type -->
+        <div class="filter-section">
+          <h3 class="filter-title">Property type</h3>
+          <div class="filter-options">
+            <button class="filter-btn" data-filter="property" data-value="house">House</button>
+            <button class="filter-btn" data-filter="property" data-value="apartment">Apartment</button>
+            <button class="filter-btn" data-filter="property" data-value="guesthouse">Guesthouse</button>
+            <button class="filter-btn" data-filter="property" data-value="hotel">Hotel</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Amenities -->
+        <div class="filter-section">
+          <h3 class="filter-title">Amenities</h3>
+          <div class="filter-options">
+            <button class="filter-btn" data-filter="amenity" data-value="wifi">Wifi</button>
+            <button class="filter-btn" data-filter="amenity" data-value="kitchen">Kitchen</button>
+            <button class="filter-btn" data-filter="amenity" data-value="washer">Washer</button>
+            <button class="filter-btn" data-filter="amenity" data-value="dryer">Dryer</button>
+            <button class="filter-btn" data-filter="amenity" data-value="ac">Air conditioning</button>
+            <button class="filter-btn" data-filter="amenity" data-value="heating">Heating</button>
+            <button class="filter-btn" data-filter="amenity" data-value="workspace">Dedicated workspace</button>
+            <button class="filter-btn" data-filter="amenity" data-value="tv">TV</button>
+            <button class="filter-btn" data-filter="amenity" data-value="hair-dryer">Hair dryer</button>
+            <button class="filter-btn" data-filter="amenity" data-value="iron">Iron</button>
+            <button class="filter-btn" data-filter="amenity" data-value="pool">Pool</button>
+            <button class="filter-btn" data-filter="amenity" data-value="parking">Free parking</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Accessibility -->
+        <div class="filter-section">
+          <h3 class="filter-title">Accessibility features</h3>
+          <p class="filter-description">These features help guests with accessibility needs</p>
+          <div class="filter-options">
+            <button class="filter-btn" data-filter="accessibility" data-value="step-free">Step-free guest entrance</button>
+            <button class="filter-btn" data-filter="accessibility" data-value="wide-doorways">Guest entrance wider than 32 inches</button>
+            <button class="filter-btn" data-filter="accessibility" data-value="accessible-bathroom">Accessible bathroom</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="clear-btn" id="clear-filters">Clear all</button>
+        <button class="apply-btn" id="apply-filters">Show results</button>
+      </div>
     </div>
   </div>
 
@@ -277,16 +680,23 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    // User toggle functionality
     let toggleDiv = document.querySelector(".user-toggle");
     let toggleButton = document.querySelector("#check-div");
+    
     toggleButton.addEventListener("change", () => {
-      if (toggleButton.checked) {
-        toggleDiv.style.display = "inline-flex";
-      } else {
+      toggleDiv.style.display = toggleButton.checked ? "inline-flex" : "none";
+    });
+
+    // Close user dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.user-btn') && !event.target.closest('.user-toggle')) {
+        toggleButton.checked = false;
         toggleDiv.style.display = "none";
       }
     });
 
+    // Search placeholder animation
     document.addEventListener("DOMContentLoaded", function () {
       const searchInput = document.querySelector(".searchInput");
       const placeholderTexts = ["Search Title", "Enter Hotel", "Type to Search"];
@@ -337,23 +747,343 @@
       });
     });
 
-    // Filter modal functionality
-    document.querySelector("#filter-near_search").addEventListener("click", () => {
-      document.getElementById("modal").style.display = "block";
+    // Filter Modal Management
+    const modal = document.getElementById("modal");
+    const filterBtn = document.querySelector("#filter-near_search");
+    const closeBtn = document.querySelector(".close");
+    const clearBtn = document.getElementById("clear-filters");
+    const applyBtn = document.getElementById("apply-filters");
+
+    let filterState = {
+      type: null,
+      property: null,
+      amenities: [],
+      accessibility: [],
+      bedrooms: 0,
+      beds: 0,
+      bathrooms: 0,
+      minPrice: null,
+      maxPrice: null
+    };
+
+    // Open modal
+    filterBtn.addEventListener("click", () => {
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden";
     });
 
-    // Close modal when clicking the X
-    document.querySelector(".close").addEventListener("click", () => {
-      document.getElementById("modal").style.display = "none";
-    });
+    // Close modal
+    function closeModal() {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    closeBtn.addEventListener("click", closeModal);
 
     // Close modal when clicking outside
     window.addEventListener("click", (event) => {
-      const modal = document.getElementById("modal");
       if (event.target === modal) {
-        modal.style.display = "none";
+        closeModal();
       }
     });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+      }
+    });
+
+    // Filter button functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const filterType = this.dataset.filter;
+        const filterValue = this.dataset.value;
+
+        if (filterType === 'amenity' || filterType === 'accessibility') {
+          // Multi-select for amenities and accessibility
+          this.classList.toggle('active');
+          const array = filterState[filterType === 'amenity' ? 'amenities' : 'accessibility'];
+          
+          if (this.classList.contains('active')) {
+            if (!array.includes(filterValue)) {
+              array.push(filterValue);
+            }
+          } else {
+            const index = array.indexOf(filterValue);
+            if (index > -1) {
+              array.splice(index, 1);
+            }
+          }
+        } else {
+          // Single select for type and property
+          const siblings = document.querySelectorAll(`[data-filter="${filterType}"]`);
+          siblings.forEach(sibling => sibling.classList.remove('active'));
+          
+          if (filterState[filterType] === filterValue) {
+            // Deselect if clicking the same option
+            filterState[filterType] = null;
+          } else {
+            this.classList.add('active');
+            filterState[filterType] = filterValue;
+          }
+        }
+      });
+    });
+
+    // Counter functionality
+    const counters = {
+      bedrooms: 0,
+      beds: 0,
+      bathrooms: 0
+    };
+
+    function updateCounter(type, value) {
+      counters[type] = Math.max(0, value);
+      const countElement = document.getElementById(`${type}-count`);
+      countElement.textContent = counters[type] === 0 ? 'Any' : counters[type];
+      filterState[type] = counters[type];
+      
+      // Update button states
+      const decreaseBtn = document.querySelector(`[data-counter="${type}"][data-action="decrease"]`);
+      decreaseBtn.disabled = counters[type] === 0;
+    }
+
+    document.querySelectorAll('.counter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const counterType = this.dataset.counter;
+        const action = this.dataset.action;
+        const currentValue = counters[counterType];
+        
+        if (action === 'increase') {
+          updateCounter(counterType, currentValue + 1);
+        } else if (action === 'decrease' && currentValue > 0) {
+          updateCounter(counterType, currentValue - 1);
+        }
+      });
+    });
+
+    // Price range functionality
+    const minPriceInput = document.getElementById('min-price');
+    const maxPriceInput = document.getElementById('max-price');
+
+    minPriceInput.addEventListener('input', function() {
+      filterState.minPrice = this.value ? parseInt(this.value) : null;
+    });
+
+    maxPriceInput.addEventListener('input', function() {
+      filterState.maxPrice = this.value ? parseInt(this.value) : null;
+    });
+
+    // Clear all filters
+    clearBtn.addEventListener('click', function() {
+      // Reset filter state
+      filterState = {
+        type: null,
+        property: null,
+        amenities: [],
+        accessibility: [],
+        bedrooms: 0,
+        beds: 0,
+        bathrooms: 0,
+        minPrice: null,
+        maxPrice: null
+      };
+
+      // Reset UI
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Reset counters
+      Object.keys(counters).forEach(key => {
+        counters[key] = 0;
+        updateCounter(key, 0);
+      });
+
+      // Reset price inputs
+      minPriceInput.value = '';
+      maxPriceInput.value = '';
+    });
+
+    // Apply filters
+    applyBtn.addEventListener('click', function() {
+      // Build query parameters
+      const params = new URLSearchParams();
+      
+      // Add non-empty filters to params
+      if (filterState.type) params.append('type', filterState.type);
+      if (filterState.property) params.append('property', filterState.property);
+      if (filterState.bedrooms > 0) params.append('bedrooms', filterState.bedrooms);
+      if (filterState.beds > 0) params.append('beds', filterState.beds);
+      if (filterState.bathrooms > 0) params.append('bathrooms', filterState.bathrooms);
+      if (filterState.minPrice) params.append('minPrice', filterState.minPrice);
+      if (filterState.maxPrice) params.append('maxPrice', filterState.maxPrice);
+      
+      // Add array filters
+      if (filterState.amenities.length > 0) {
+        filterState.amenities.forEach(amenity => {
+          params.append('amenities', amenity);
+        });
+      }
+      
+      if (filterState.accessibility.length > 0) {
+        filterState.accessibility.forEach(feature => {
+          params.append('accessibility', feature);
+        });
+      }
+
+      // Show loading state
+      applyBtn.textContent = 'Applying...';
+      applyBtn.disabled = true;
+
+      // Navigate to filtered results
+      const currentPath = window.location.pathname;
+      const newUrl = currentPath.includes('/filter/') 
+        ? `${currentPath}${params.toString() ? '?' + params.toString() : ''}`
+        : `/listings${params.toString() ? '?' + params.toString() : ''}`;
+      
+      // Close modal and navigate
+      setTimeout(() => {
+        closeModal();
+        window.location.href = newUrl;
+      }, 500);
+    });
+
+    // Search functionality
+    const searchButton = document.querySelector('.searchButton');
+    const searchInput = document.querySelector('.searchInput');
+
+    searchButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      performSearch();
+    });
+
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch();
+      }
+    });
+
+    function performSearch() {
+      const searchTerm = searchInput.value.trim();
+      if (searchTerm) {
+        const params = new URLSearchParams();
+        params.append('search', searchTerm);
+        window.location.href = `/listings?${params.toString()}`;
+      }
+    }
+
+    // Initialize counter button states
+    document.addEventListener('DOMContentLoaded', function() {
+      Object.keys(counters).forEach(key => {
+        updateCounter(key, 0);
+      });
+    });
+
+    // Add smooth scrolling for modal content
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.addEventListener('scroll', function() {
+      const scrolled = this.scrollTop > 0;
+      const header = document.querySelector('.modal-header');
+      
+      if (scrolled) {
+        header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+      } else {
+        header.style.boxShadow = 'none';
+      }
+    });
+
+    // Animate filter buttons on hover
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        if (!this.classList.contains('active')) {
+          this.style.transform = 'translateY(-2px)';
+        }
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Add price validation
+    function validatePriceInputs() {
+      const minPrice = parseInt(minPriceInput.value) || 0;
+      const maxPrice = parseInt(maxPriceInput.value) || Infinity;
+      
+      if (minPrice > maxPrice && maxPriceInput.value) {
+        maxPriceInput.style.borderColor = '#ff6b6b';
+        minPriceInput.style.borderColor = '#ff6b6b';
+      } else {
+        maxPriceInput.style.borderColor = '#ddd';
+        minPriceInput.style.borderColor = '#ddd';
+      }
+    }
+
+    minPriceInput.addEventListener('blur', validatePriceInputs);
+    maxPriceInput.addEventListener('blur', validatePriceInputs);
+
+    // Add filter count indicator
+    function updateFilterCount() {
+      let count = 0;
+      
+      if (filterState.type) count++;
+      if (filterState.property) count++;
+      if (filterState.bedrooms > 0) count++;
+      if (filterState.beds > 0) count++;
+      if (filterState.bathrooms > 0) count++;
+      if (filterState.minPrice) count++;
+      if (filterState.maxPrice) count++;
+      count += filterState.amenities.length;
+      count += filterState.accessibility.length;
+      
+      const filterIcon = document.querySelector('#filter-near_search i');
+      
+      if (count > 0) {
+        if (!document.querySelector('.filter-count')) {
+          const countBadge = document.createElement('span');
+          countBadge.className = 'filter-count';
+          countBadge.style.cssText = `
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff5a5f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+          `;
+          document.querySelector('#filter-near_search').style.position = 'relative';
+          document.querySelector('#filter-near_search').appendChild(countBadge);
+        }
+        document.querySelector('.filter-count').textContent = count;
+      } else {
+        const badge = document.querySelector('.filter-count');
+        if (badge) badge.remove();
+      }
+    }
+
+    // Update filter count whenever filters change
+    const originalApply = applyBtn.onclick;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => setTimeout(updateFilterCount, 0));
+    });
+    
+    document.querySelectorAll('.counter-btn').forEach(btn => {
+      btn.addEventListener('click', () => setTimeout(updateFilterCount, 0));
+    });
+
+    minPriceInput.addEventListener('input', updateFilterCount);
+    maxPriceInput.addEventListener('input', updateFilterCount);
+    clearBtn.addEventListener('click', updateFilterCount);
+
   </script>
 
 </body>
