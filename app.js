@@ -132,17 +132,18 @@ const sessionOptions = {
   },
 };
 
+// ✅ CRITICAL: Session and flash setup MUST come before passport and routes
 app.use(session(sessionOptions));
 app.use(flash());
 
-// Passport setup
+// Passport setup (after session)
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Flash middleware
+// ✅ CRITICAL: Flash middleware MUST come before routes
 app.use((req, res, next) => {
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error");
@@ -152,7 +153,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
+// Routes (after all middleware setup)
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);

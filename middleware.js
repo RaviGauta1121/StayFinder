@@ -6,7 +6,7 @@
 const Listing = require("./models/listing.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { reviewSchema, listingSchema } = require("./schema.js");
-const Revie = require("./models/review.js");
+const Review = require("./models/review.js"); // ✅ FIXED: Changed "Revie" to "Review"
 
 /**
  * * Check User Authentication
@@ -36,10 +36,13 @@ module.exports.saveRedirectUrl = (req, res, next) => {
  * * Check Ownership
  * ? Verifies if the current user owns the listing by comparing user IDs.
  */
-
 module.exports.isOwner = async (req, res, next) => {
   let { id } = req.params;
   let listing = await Listing.findById(id);
+  if (!listing) {
+    req.flash("error", "Listing not found!");
+    return res.redirect("/listings");
+  }
   if (!listing.owner._id.equals(res.locals.currUser._id)) {
     req.flash(
       "error",
@@ -82,10 +85,13 @@ module.exports.validateReview = (req, res, next) => {
  * * Retrieves the review using its ID and verifies if the author matches the current user.
  * ? If the author doesn't match, redirects the user to the listing page with an error message.
  */
-
 module.exports.isReviewAuthor = async (req, res, next) => {
   let { id, reviewId } = req.params;
-  let review = await Review.findById(reviewId);
+  let review = await Review.findById(reviewId); // ✅ NOW "Review" matches the import
+  if (!review) {
+    req.flash("error", "Review not found!");
+    return res.redirect(`/listings/${id}`);
+  }
   if (!review.author.equals(res.locals.currUser._id)) {
     req.flash("error", "Access Denied: You're not the author of this review");
     return res.redirect(`/listings/${id}`);

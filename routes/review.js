@@ -8,11 +8,12 @@
  * ? ListingSchema and ReviewSchema Validation are available in schema.js
  */
 
+const express = require("express");
 const wrapAsync = require("../utils/wrapAsyn.js");
 const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing.js");
-const { reviewSchema, listingSchema } = require("../schema.js");
 const Review = require("../models/review.js");
+const { reviewSchema, listingSchema } = require("../schema.js");
 const reviewController = require("../controller/reviews.js");
 const {
   isLoggedIn,
@@ -24,7 +25,6 @@ const {
  * * Initializing Express Router
  * * Create a new router instance for defining endpoint routes.
  */
-const express = require("express");
 const router = express.Router({ mergeParams: true });
 
 /**
